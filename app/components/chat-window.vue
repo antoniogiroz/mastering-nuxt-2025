@@ -1,20 +1,31 @@
 <script setup lang="ts">
 import useChatScroll from '~/composables/use-chat-scroll';
+import type { Chat, ChatMessage } from '~/types';
 
-const { chat, messages, sendMessage } = useChat();
+interface Props {
+  chat: Chat;
+  messages: ChatMessage[];
+}
+
+const props = defineProps<Props>();
+
+const emit = defineEmits<{
+  'send-message': [message: string]
+}>();
+
 const { showScrollButton, scrollToBottom, pinToBottom} = useChatScroll();
 
 function handleSendMessage(message: string) {
-  sendMessage(message);
+  emit('send-message', message);
 }
 
-watch(() => messages.value, pinToBottom, { deep: true});
+watch(() => props.messages, pinToBottom, { deep: true });
 </script>
 
 <template>
   <div ref="scrollContainer" class="scroll-container">
     <UContainer class="chat-container">
-      <div v-if="!messages?.length" class="empty-state">
+      <div v-if="!props.messages?.length" class="empty-state">
         <div class="empty-state-card">
           <h2 class="empty-state-title">Start your chat</h2>
           <ChatInput @send-message="handleSendMessage" />
@@ -29,7 +40,7 @@ watch(() => messages.value, pinToBottom, { deep: true});
         </div>
         <div class="messages-container">
           <div
-            v-for="message in messages"
+            v-for="message in props.messages"
             :key="message.id"
             class="message"
             :class="{
