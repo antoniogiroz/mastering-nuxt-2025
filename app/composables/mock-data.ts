@@ -12,7 +12,7 @@ const MOCK_MESSAGES: ChatMessage[] = [
     id: '2',
     role: 'assistant',
     content:
-      "Of course! I'd be happy to help with your Nuxt.js project. What specific questions or issues do you have?",
+      'Of course! I\'d be happy to help with your Nuxt.js project. What specific questions or issues do you have?',
   },
   {
     id: '3',
@@ -23,7 +23,7 @@ const MOCK_MESSAGES: ChatMessage[] = [
     id: '4',
     role: 'assistant',
     content:
-      "Nuxt.js provides server-side rendering out of the box! You don't need to do any special configuration for basic SSR. If you need specific optimizations, we can discuss those in detail.",
+      'Nuxt.js provides server-side rendering out of the box! You don\'t need to do any special configuration for basic SSR. If you need specific optimizations, we can discuss those in detail.',
   },
 ];
 

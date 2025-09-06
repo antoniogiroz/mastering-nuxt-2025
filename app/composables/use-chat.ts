@@ -4,7 +4,7 @@ import { MOCK_CHAT } from './mock-data';
 export default function useChat() {
   const chat = ref<Chat>(MOCK_CHAT);
   const messages = computed<ChatMessage[]>(
-    () => chat.value.messages
+    () => chat.value.messages,
   );
 
   function createMessage(message: string, role: ChatMessage['role']) {
@@ -24,7 +24,7 @@ export default function useChat() {
       method: 'POST',
       body: {
         messages: messages.value,
-      }
+      },
     });
 
     messages.value.push(data);

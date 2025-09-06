@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import useChatScroll from '~/composables/use-chat-scroll';
 import type { Chat, ChatMessage } from '~/types';
+import useChatScroll from '~/composables/use-chat-scroll';
 
 interface Props {
-  chat: Chat;
-  messages: ChatMessage[];
-  typing: boolean;
+  chat: Chat
+  messages: ChatMessage[]
+  typing: boolean
 }
 
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  'send-message': [message: string]
+  sendMessage: [message: string]
 }>();
 
-const { showScrollButton, scrollToBottom, pinToBottom} = useChatScroll();
+const { scrollContainer, showScrollButton, scrollToBottom, pinToBottom } = useChatScroll();
 
 function handleSendMessage(message: string) {
-  emit('send-message', message);
+  emit('sendMessage', message);
 }
 
 watch(() => props.messages, pinToBottom, { deep: true });
@@ -28,7 +28,9 @@ watch(() => props.messages, pinToBottom, { deep: true });
     <UContainer class="chat-container">
       <div v-if="!props.messages?.length" class="empty-state">
         <div class="empty-state-card">
-          <h2 class="empty-state-title">Start your chat</h2>
+          <h2 class="empty-state-title">
+            Start your chat
+          </h2>
           <ChatInput @send-message="handleSendMessage" />
         </div>
       </div>
@@ -153,9 +155,7 @@ watch(() => props.messages, pinToBottom, { deep: true });
   position: fixed;
   bottom: 1.5rem;
   max-width: 800px;
-  width: calc(
-    100% - 3rem
-  ); /* Account for container padding */
+  width: calc(100% - 3rem); /* Account for container padding */
   z-index: 10;
 }
 

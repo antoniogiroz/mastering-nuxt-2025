@@ -5,7 +5,7 @@
 <template>
   <div class="layout-container">
     <main class="main-content">
-      <slot/>
+      <slot />
     </main>
   </div>
 </template>

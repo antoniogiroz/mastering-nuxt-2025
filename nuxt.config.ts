@@ -8,12 +8,12 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui', '@nuxt/eslint'],
 
   runtimeConfig: {
-    openaiApiKey: ''
+    openaiApiKey: '',
   },
 
   vite: {
     optimizeDeps: {
-      include: ['debug']
-    }
-  }
+      include: ['debug'],
+    },
+  },
 });

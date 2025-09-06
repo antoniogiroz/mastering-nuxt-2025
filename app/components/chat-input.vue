@@ -4,29 +4,30 @@ const { isStreaming = false } = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  'send-message': [message: string]
+  sendMessage: [message: string]
 }>();
 
 const textareaRef = useTemplateRef('textareaRef');
 const newMessage = ref('');
 
-const handleSendMessage = () => {
-  if (!newMessage.value.trim() || isStreaming) return;
-  emit('send-message', newMessage.value.trim());
+function handleSendMessage() {
+  if (!newMessage.value.trim() || isStreaming)
+    return;
+  emit('sendMessage', newMessage.value.trim());
   newMessage.value = '';
   nextTick(() => {
     adjustTextareaHeight();
     textareaRef.value?.focus();
   });
-};
+}
 
-const adjustTextareaHeight = async (): Promise<void> => {
+async function adjustTextareaHeight(): Promise<void> {
   if (textareaRef.value) {
     textareaRef.value.style.height = 'auto';
     await nextTick();
     textareaRef.value.style.height = `${textareaRef.value.scrollHeight}px`;
   }
-};
+}
 
 onMounted(() => {
   textareaRef.value?.focus();
@@ -39,7 +40,7 @@ watch(
       await nextTick();
       textareaRef.value?.focus();
     }
-  }
+  },
 );
 </script>
 
@@ -104,7 +105,8 @@ watch(
 
 .message-form-wrapper:hover {
   outline: none;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
