@@ -8,11 +8,19 @@ const title = computed(() =>
   : `${appConfig.title}`
 );
 
+const typing = ref(false);
+
+async function handleSendMessage(message: string) {
+  typing.value = true;
+  await sendMessage(message);
+  typing.value = false;
+}
+
 useHead({
   title,
 });
 </script>
 
 <template>
-  <ChatWindow :chat :messages @send-message="sendMessage" />
+  <ChatWindow :chat :messages :typing @send-message="handleSendMessage" />
 </template>
