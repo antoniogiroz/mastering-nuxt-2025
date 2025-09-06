@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.2.2",
+    "@nuxtjs/mdc": "0.17.3",
     "eslint": "^9.34.0",
     "eslint-plugin-format": "^1.0.1",
     "husky": "9.1.7"
