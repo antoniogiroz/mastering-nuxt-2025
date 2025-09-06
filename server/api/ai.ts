@@ -1,13 +1,19 @@
+import { createOpenAiModel, generateChatResponse } from "../services/ai.service";
+
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { messages } = body;
 
   const id = messages.length.toString();
-  const lastMessage = messages[messages.length - 1];
+
+  const openAiApiKey = useRuntimeConfig().openaiApiKey;
+  const openAiModel = createOpenAiModel(openAiApiKey);
+
+  const response = await generateChatResponse(openAiModel, messages);
 
   return {
     id,
       role: 'assistant',
-      content: `(server) You said: ${lastMessage.content}`,
+      content: response,
   };
 });
