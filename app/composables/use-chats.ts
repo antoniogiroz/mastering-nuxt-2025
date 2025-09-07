@@ -1,10 +1,10 @@
 import type { Chat } from '../types';
 import { MOCK_CHAT } from './mock-data';
 
-export default function useChats(options: { projectId?: string } = {}) {
+export default function useChats() {
   const chats = useState<Chat[]>('chats', () => [MOCK_CHAT]);
 
-  function createChat() {
+  function createChat(options: { projectId?: string } = {}) {
     const id = (chats.value.length + 1).toString();
     const chat = {
       id,
@@ -20,6 +20,11 @@ export default function useChats(options: { projectId?: string } = {}) {
     return chat;
   }
 
+  async function createChatAndNavigate(options: { projectId?: string } = {}) {
+    const chat = createChat(options);
+    await navigateTo(`/chats/${chat.id}`);
+  }
+
   function chatsInProject(projectId: string) {
     return chats.value.filter(
       chat => chat.projectId === projectId,
@@ -29,6 +34,7 @@ export default function useChats(options: { projectId?: string } = {}) {
   return {
     chats,
     createChat,
+    createChatAndNavigate,
     chatsInProject,
   };
 }
