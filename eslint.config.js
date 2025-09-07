@@ -8,6 +8,7 @@ export default antfu(
   {
     rules: {
       'style/semi': ['error', 'always'],
+      'style/brace-style': ['error', '1tbs'],
     },
   },
 );
