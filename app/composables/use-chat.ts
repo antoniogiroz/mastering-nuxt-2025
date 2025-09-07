@@ -1,10 +1,14 @@
-import type { Chat, ChatMessage } from '../types';
-import { MOCK_CHAT } from './mock-data';
+import type { ChatMessage } from '../types';
 
-export default function useChat() {
-  const chat = ref<Chat>(MOCK_CHAT);
+export default function useChat(chatId: string) {
+  const { chats } = useChats();
+
+  const chat = computed(() =>
+    chats.value.find(c => c.id === chatId),
+  );
+
   const messages = computed<ChatMessage[]>(
-    () => chat.value.messages,
+    () => chat.value?.messages || [],
   );
 
   function createMessage(message: string, role: ChatMessage['role']) {
@@ -18,6 +22,9 @@ export default function useChat() {
   }
 
   async function sendMessage(message: string) {
+    if (!chat.value) {
+      return;
+    }
     messages.value.push(createMessage(message, 'user'));
 
     const data = await $fetch<ChatMessage>('/api/ai', {
@@ -27,6 +34,7 @@ export default function useChat() {
       },
     });
 
+    chat.value.updatedAt = new Date();
     messages.value.push(data);
   }
 

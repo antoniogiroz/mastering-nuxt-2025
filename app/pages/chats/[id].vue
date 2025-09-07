@@ -1,6 +1,10 @@
 <script setup lang="ts">
-const { chat, messages, sendMessage } = useChat();
 const appConfig = useAppConfig();
+
+const route = useRoute();
+const { chat, messages, sendMessage } = useChat(
+  route.params.id as string,
+);
 
 const title = computed(() =>
   chat.value?.title
