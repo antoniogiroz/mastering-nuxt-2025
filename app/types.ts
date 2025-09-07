@@ -9,8 +9,8 @@ export interface Chat {
   title: string
   messages: ChatMessage[]
   projectId?: string
-  createdAt?: Date
-  updatedAt?: Date
+  createdAt: Date
+  updatedAt: Date
 }
 
 export interface Project {
