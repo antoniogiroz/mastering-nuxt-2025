@@ -2,16 +2,10 @@
 import type { Chat } from '~/types';
 
 const route = useRoute();
-const {
-  chat: chatFromChats,
-  messages,
-  sendMessage,
-} = useChat(route.params.id as string);
+const { chat: chatFromChats, messages, sendMessage } = useChat(route.params.id as string);
 
 if (!chatFromChats.value) {
-  await navigateTo(`/projects/${route.params.projectId}`, {
-    replace: true,
-  });
+  await navigateTo(`/projects/${route.params.projectId}`, { replace: true });
 }
 
 const chat = computed(() => chatFromChats.value as Chat);

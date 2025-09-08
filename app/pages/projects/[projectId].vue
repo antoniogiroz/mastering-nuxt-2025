@@ -16,8 +16,9 @@ const isEditing = ref(false);
 const editedName = ref('');
 
 function startEditing() {
-  if (!project.value || onChatPage.value)
+  if (!project.value || onChatPage.value) {
     return;
+  }
 
   editedName.value = project.value.name;
   isEditing.value = true;
@@ -29,10 +30,12 @@ function cancelEditing() {
 }
 
 async function handleRename() {
-  if (!editedName.value.trim() || !project.value)
+  if (!editedName.value.trim() || !project.value) {
     return;
-  if (editedName.value.trim() === project.value.name)
+  }
+  if (editedName.value.trim() === project.value.name) {
     return;
+  }
 
   isEditing.value = false;
   try {

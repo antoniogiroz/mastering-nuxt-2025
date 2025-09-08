@@ -9,10 +9,7 @@ const chats = chatsInProject(projectId);
 
 <template>
   <div>
-    <div
-      v-if="chats?.length"
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-    >
+    <div v-if="chats?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <NuxtLink
         v-for="chat in chats"
         :key="chat.id"
@@ -24,14 +21,8 @@ const chats = chatsInProject(projectId);
               {{ chat.title || 'Untitled Chat' }}
             </h3>
           </template>
-          <p
-            v-if="chat.messages?.length"
-            class="text-sm line-clamp-2 text-(--ui-text-dimmed)"
-          >
-            {{
-              chat.messages[chat.messages.length - 1]
-                ?.content
-            }}
+          <p v-if="chat.messages?.length" class="text-sm line-clamp-2 text-(--ui-text-dimmed)">
+            {{ chat.messages[chat.messages.length - 1]?.content }}
           </p>
         </UCard>
       </NuxtLink>
