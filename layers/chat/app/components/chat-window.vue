@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Chat, ChatMessage } from '~~/layers/chat/app/types';
+import type { Chat, ChatMessage } from '~~/layers/chat/shared/types/types';
 import useChatScroll from '~~/layers/chat/app/composables/use-chat-scroll';
 
 interface Props {
